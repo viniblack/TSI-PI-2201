@@ -20,7 +20,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = Product::create($request->all());
-        return redirect(route('product.create'));
+        session()->flash('success', 'O produto foi criado com sucesso!');
+        return redirect(route('product.index'));
     }
 
     public function edit(Product $product)
@@ -31,11 +32,14 @@ class ProductController extends Controller
     public function update(Product $product, Request $request)
     {
         $product->update($request->all());
-        return redirect(route('product.edit', $product->id));
+        session()->flash('success', 'O produto foi alterado com sucesso!');
+        return redirect(route('product.index', $product->id));
     }
 
     public function destroy(Product $product){
         $product->delete();
+        session()->flash('success', 'O produto foi apagado com sucesso!');
         return redirect(route('product.index'));
+
     }
 }
