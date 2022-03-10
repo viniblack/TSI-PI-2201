@@ -2,7 +2,11 @@
     {{ session()->get('success') }}
 </div>
 
-<table>
+<a href="{{route('product.index')}}">Produto</a> <br>
+<a href="{{route('product.create')}}">Criar Produto</a> <br>
+<a href="{{route('product.trash')}}">Lixeira Produto</a> <br>
+
+<table border="1">
     @foreach ($products as $product)
         <tr>
             <td>{{ $product->id }}</td>

@@ -42,4 +42,17 @@ class CategoryController extends Controller
         return redirect(route('category.index'));
 
     }
+
+    public function trash()
+    {
+        return view('category.trash')->with('categories', Category::onlyTrashed()->get());
+    }
+
+    public function restore($category_id)
+    {
+        $category = Category::onlyTrashed()->where('id', $category_id)->first();
+        $category->restore();
+        session()->flash('success', 'O produto foi restaurado com sucesso!');
+        return redirect(route('category.index'));
+    }
 }
