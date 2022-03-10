@@ -1,4 +1,4 @@
-<form action="{{route('product.store')}}" method="POST">
+<form action="{{ route('product.store') }}" method="POST">
     @csrf
     <label for="name">Nome do produto</label>
     <input type="text" name="name" id="name">
@@ -8,5 +8,11 @@
     <input type="number" step="0.1" name="price" id="price">
     <label for="stock">estoque</label>
     <input type="number" name="stock" id="stock">
+    <label for="category">Selecione uma categoria</label>
+    <select name="category_id" id="">
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
     <button type="submit">Enviar</button>
 </form>
