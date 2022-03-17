@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{route('category.store')}}" method="POST">
+<form action="{{route('tag.store')}}" method="POST">
     @csrf
-    <label for="name">Nome do produto</label>
+    <label for="name">Nome da tag</label>
     <input type="text" name="name" id="name">
     <button type="submit">Enviar</button>
 </form>

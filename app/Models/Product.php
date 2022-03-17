@@ -10,10 +10,20 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['name', 'price', 'description', 'stock','category_id'];
+    protected $fillable = ['name', 'price', 'description', 'stock', 'category_id'];
 
-    public function Category(){
+    public function Category()
+    {
         return $this->belongsTo(Category::class);
     }
 
+    public function Tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function hasTag($tag_id)
+    {
+        return in_array($tag_id, $this->Tags->pluck('id')->toArray());
+    }
 }

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-use App\Models\Product;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +38,13 @@ Route::put('/category/edit/{category}/', [CategoryController::class, 'update'])-
 Route::get('/category/destroy/{category}/', [CategoryController::class, 'destroy'])->name('category.destroy');
 Route::get('/category/trash', [CategoryController::class, 'trash'])->name('category.trash');
 Route::get('/category/trash/restore/{category}/', [CategoryController::class, 'restore'])->name('category.restore');
+
+Route::get('/tag', [TagController::class, 'index'])->name('tag.index');
+Route::get('/tag/create/', [TagController::class,"create"])->name('tag.create');
+Route::post('/tag/create/', [TagController::class,"store"])->name('tag.store');
+
+Route::get('/tag/destroy/{tag}/', [TagController::class, 'destroy'])->name('tag.destroy');
+Route::get('/tag/trash/restore/{tag}/', [TagController::class, 'restore'])->name('tag.restore');
+Route::get('/tag/trash', [TagController::class, 'trash'])->name('tag.trash');
+Route::put('/tag/edit/{tag}/', [TagController::class, 'update'])->name('tag.update');
+Route::get('/tag/edit/{tag}/', [TagController::class, 'edit'])->name('tag.edit');

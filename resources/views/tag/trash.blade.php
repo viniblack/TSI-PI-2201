@@ -6,16 +6,19 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome da Categoria</th>
-                    <th>Restaurar</th>
+                    <th>Nome da Tag</th>
+                  
+
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @foreach ($tags as $tag)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
-                        <td><a href="{{ route('category.restore', $category->id) }}">Restaurar</a></td>
+                        <td>{{ $tag->id }}</td>
+                        <td>{{ $tag->name }}</td>
+
+                        <td><a href="{{ route('tag.restore', $tag->id) }}">Restaurar</a></td>
+
                     </tr>
                 @endforeach
             </tbody>

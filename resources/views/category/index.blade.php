@@ -1,18 +1,32 @@
-<div>
-    {{ session()->get('success') }}
-</div>
+@extends('layouts.app')
 
-<a href="{{route('category.index')}}">Categoria</a> <br>
-<a href="{{route('category.create')}}">Criar Categoria</a> <br>
-<a href="{{route('category.trash')}}">Lixeira Categoria</a> <br>
+@section('content')
+    <a class="btn btn-lg btn-success float-end me-5" href="{{ route('category.create') }}">
+        Criar Categorias
+    </a>
+    <div class="container mt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome da Categoria</th>
+                    <th>Quantidade de Produtos na Categoria</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
 
-<table border="1">
-    @foreach ($categories as $category)
-        <tr>
-            <td>{{ $category->id }}</td>
-            <td>{{ $category->name }}</td>
-            <td><a href="{{ route('category.edit', $category->id) }}">Editar</a></td>
-            <td><a href="{{ route('category.destroy', $category->id) }}">Apagar</a></td>
-        </tr>
-    @endforeach
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->Products->count() }}</td>
+                        <td><a href="{{ route('category.edit', $category->id) }}">Editar</a></td>
+                        <td><a href="{{ route('category.destroy', $category->id) }}">Apagar</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection

@@ -1,25 +1,50 @@
-<div>
-    {{ session()->get('success') }}
-</div>
+@extends('layouts.app')
 
-<a href="{{route('product.index')}}">Produto</a>
-<a href="{{route('product.create')}}">Criar Produto</a>
-<a href="{{route('product.trash')}}">Lixeira Produto</a>
+@section('content')
+    <a class="btn btn-lg btn-success float-end me-5" href=" {{ route('product.create') }}">
+        Criar Produto
+    </a>
+    <div class="container mt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Produto</th>
+                    <th>Categoria ID</th>
+                    <th>Nome da Categoria</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
 
-<table border="1">
-    @foreach ($products as $product)
-        <tr>
-            <td>{{ $product->id }}</td>
-            <td>{{ $product->name }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
 
-            <td>{{ $product->Category->id }}</td>
-            <td>{{ $product->Category->name }}</td>
+                        <td>{{ $product->Category->id }}</td>
+                        <td>{{ $product->Category->name }}</td>
 
-            <td>{{ $product->description }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->stock }}</td>
-            <td><a href="{{ route('product.edit', $product->id) }}">Editar</a></td>
-            <td><a href="{{ route('product.destroy', $product->id) }}">Apagar</a></td>
-        </tr>
-    @endforeach
-</table>
+                        <td>
+                            @foreach ($product->Tags()->get() as $tag)
+                                {{ $tag->name }}, 
+                            @endforeach
+
+
+                        </td>
+
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td><a href="{{ route('product.edit', $product->id) }}">Editar</a></td>
+                        <td><a href="{{ route('product.destroy', $product->id) }}">Apagar</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection

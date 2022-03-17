@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <form action="{{route('category.edit', $category->id)}}" method="POST">
     @csrf
     @method("PUT")
@@ -6,3 +9,4 @@
 
     <button type="submit">Enviar</button>
 </form>
+@endsection

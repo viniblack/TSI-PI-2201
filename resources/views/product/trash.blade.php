@@ -1,25 +1,38 @@
-<div>
-    {{ session()->get('success') }}
-</div>
+@extends('layouts.app')
 
-<a href="{{route('product.index')}}">Produto</a> <br>
-<a href="{{route('product.create')}}">Criar Produto</a> <br>
-<a href="{{route('product.trash')}}">Lixeira Produto</a> <br>
+@section('content')
+    <div class="container mt-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Produto</th>
+                    <th>Categoria ID</th>
+                    <th>Nome da Categoria</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Restaurar</th>
 
-<table border="1">
-    @foreach ($products as $product)
-        <tr>
-            <td>{{ $product->id }}</td>
-            <td>{{ $product->name }}</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
 
-            <td>{{ $product->Category->id }}</td>
-            <td>{{ $product->Category->name }}</td>
+                        <td>{{ $product->Category->id }}</td>
+                        <td>{{ $product->Category->name }}</td>
 
-            <td>{{ $product->description }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->stock }}</td>
-            <td><a href="{{ route('product.restore', $product->id) }}">Restaurar</a></td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td><a href="{{ route('product.restore', $product->id) }}">Restaurar</a></td>
 
-        </tr>
-    @endforeach
-</table>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection
