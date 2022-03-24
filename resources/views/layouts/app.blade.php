@@ -18,27 +18,53 @@
         <nav class="nav navbar-light bg-light navbar-expand-sm">
             <div class="container-fluid">
                 <ul class="navbar-nav me-auto mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('product.index') }}">
-                            Produto
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('product.trash') }}">
-                            Lixeira Produto
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.index') }}">
-                            Categorias
-                        </a>
-                    </li>
-                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.trash') }}">
-                            Lixeira Categorias
-                        </a>
-                    </li>
+
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('product.index') }}">
+                                Produto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('product.trash') }}">
+                                Lixeira Produto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.index') }}">
+                                Categorias
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.trash') }}">
+                                Lixeira Categorias
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tag.index') }}">
+                                Tags
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tag.trash') }}">
+                                Lixeira Tags
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">
+                                Log in
+                            </a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}"
+                                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                            </li>
+                        @endif
+                    @endauth
                 </ul>
             </div>
         </nav>

@@ -12,6 +12,7 @@
                     <th>Nome do Produto</th>
                     <th>Categoria ID</th>
                     <th>Nome da Categoria</th>
+                    <th>Tags</th>
                     <th>Descrição</th>
                     <th>Preço</th>
                     <th>Estoque</th>
@@ -20,7 +21,7 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 @foreach ($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
@@ -29,12 +30,12 @@
                         <td>{{ $product->Category->id }}</td>
                         <td>{{ $product->Category->name }}</td>
 
-                        <td>
+                        <td style="width: 10rem" id="tag">
                             @foreach ($product->Tags()->get() as $tag)
-                                {{ $tag->name }}, 
+                            <p style="word-break: break-word;" class="d-inline m-0 p-0 text-wrap">
+                                {{ $tag->name }} 
+                            </p>
                             @endforeach
-
-
                         </td>
 
                         <td>{{ $product->description }}</td>
