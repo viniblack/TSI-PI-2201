@@ -18,7 +18,7 @@ use App\Http\Controllers\TagController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/re', function () {
     return view('welcome');
@@ -27,7 +27,7 @@ Route::get('/re', function () {
 require __DIR__ . '/auth.php';
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create/', [ProductController::class, "create"])->name('product.create');
