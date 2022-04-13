@@ -21,9 +21,18 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = Product::create($request->all());
-        $product->Tags()->sync($request->tags);
+        $image = "storage/" . $request->file('image')->store('itens');
 
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'category_id' => $request->category_id,
+            'image' => $image
+
+        ]);
+        $product->Tags()->sync($request->tags);
 
         session()->flash('success', 'O produto foi criado com sucesso!');
         return redirect(route('product.index'));
@@ -36,7 +45,25 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
-        $product->update($request->all());
+        if($request->image){
+            $image = "storage/" . $request->file('image')->store('itens');
+            $product->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'category_id' => $request->category_id,
+                'image' => $image
+            ]);
+        } else {
+            $product->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'category_id' => $request->category_id,
+            ]);
+        }
         $product->Tags()->sync($request->tags);
 
         session()->flash('success', 'O produto foi alterado com sucesso!');

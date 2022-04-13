@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('product.edit', $product->id) }}" method="POST">
+    <form action="{{ route('product.edit', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <label for="name">Nome do produto</label>
@@ -15,7 +15,8 @@
 
         <label for="stock">estoque</label>
         <input type="number" name="stock" id="stock" value="{{ $product->stock }}">
-
+        <label for="image">Imagem</label>
+        <input type="file" name="image" id="image">
         <select name="category_id" id="">
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
